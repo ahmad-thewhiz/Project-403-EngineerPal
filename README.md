@@ -1,2 +1,0 @@
-# EngineerPal
-Your Engineering Pal

@@ -11,8 +11,8 @@ import openai
 def loadYOUTUBE(urls):
     local = False
 
-    save_dir = "~/Downloads/YouTube"
-    
+    # save_dir = "~/Downloads/YouTube"
+    save_dir = "/home/dgxuser16/NTL/mccarthy/ahmad/EngiPal/userData"
     try:
         if local:
             loader = GenericLoader(YoutubeAudioLoader(urls, save_dir), OpenAIWhisperParserLocal())
