@@ -169,7 +169,7 @@ def loadQAChain(llm):
             print("Creating new database...")
             db = create_localDB()
 
-        retriever = db.as_retriever(search_kwargs={'k': 6})
+        retriever = db.as_retriever(search_kwargs={'k': 4})
         
         if retriever is None:
             print("Retriever: None")
