@@ -132,13 +132,14 @@ def create_localDB():
 
             for docx in documents:
                 text += (str(docx))
-        else:
-            text = "Your name is EngineerPal. You are an engineering assistant tasked with answering user queries in a truthful manner."
+        
+        text += "Your name is EngineerPal. You are an engineering assistant tasked with answering user queries in a truthful manner."
 
         text_chunks = get_text_chunks(text)
         embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
         db = Chroma.from_texts(text_chunks, embedding=embeddings, persist_directory="./userData2_embedded")
         db.persist()
+        print("NEW DB CREATED")
         return db
     except Exception as e:
         print("Error while creating chroma databse: ", str(e))
@@ -148,6 +149,7 @@ def load_localDB():
         embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
         db = Chroma(persist_directory="./userData2_embedded", embedding_function=embeddings)
         db.get()
+        print("DB LOADED")
         return db
     except Exception as e:
         print("Error while retrieving an embedded database: ", str(e))
@@ -160,12 +162,17 @@ def loadQAChain(llm):
     try:
         embedded_dir = "./userData2_embedded"
 
-        if os.path.exists(embedded_dir) and any(os.listdir(embedded_dir)):
+        if os.path.exists(embedded_dir):
+            print("Loading existing database...")
             db = load_localDB()
         else:
+            print("Creating new database...")
             db = create_localDB()
 
         retriever = db.as_retriever(search_kwargs={'k': 6})
+        
+        if retriever is None:
+            print("Retriever: None")
 
         pdf_qa = ConversationalRetrievalChain.from_llm(
             llm=llm,
