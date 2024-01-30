@@ -26,6 +26,11 @@ In the spirit of fostering innovation, EngineerPal is committed to being complet
 ### 2. Identification of relevant packages and services. [✅]
 ### 3. Development of the prototype. [✅]
 ### 4. Testing of the prototype with SaaS Interface. [✅]
+
+![alt text](https://github.com/ahmad-thewhiz/Project-403-EngineerPal/blob/main/images/Screenshot%20(1902).png?raw=true)
+![alt_text](https://github.com/ahmad-thewhiz/Project-403-EngineerPal/blob/main/images/Screenshot%202024-01-28%20222310.png?raw=true)
+
+
 ### 5. Development of Backend with Database. [⏳] 
 ### 6. Deployment on Cloud. [⏳]
 ### 7. Development of Frontend.
