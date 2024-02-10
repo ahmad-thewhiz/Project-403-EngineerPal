@@ -1,5 +1,5 @@
 import os
-from langchain.document_loaders import UnstructuredMarkdownLoader
+from langchain_community.document_loaders import UnstructuredMarkdownLoader
 
 def loadMD(file_path):
     try:

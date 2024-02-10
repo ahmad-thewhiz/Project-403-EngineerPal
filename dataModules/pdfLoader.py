@@ -1,5 +1,5 @@
 import os
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 
 def loadPDF(file_path):
     try:

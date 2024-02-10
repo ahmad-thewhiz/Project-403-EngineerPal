@@ -1,5 +1,5 @@
 import os
-from langchain.document_loaders import JSONLoader
+from langchain_community.document_loaders import JSONLoader
 
 def loadJSON(file_path):
     try:

@@ -1,5 +1,5 @@
 import os
-from langchain.document_loaders import Docx2txtLoader
+from langchain_community.document_loaders import Docx2txtLoader
 
 def loadDOCS(file_path):
     try:

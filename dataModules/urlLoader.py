@@ -1,4 +1,4 @@
-from langchain.document_loaders import UnstructuredURLLoader
+from langchain_community.document_loaders import UnstructuredURLLoader
 
 def loadURL(webLinks):
     try:

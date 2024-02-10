@@ -1,5 +1,5 @@
 import os
-from langchain.document_loaders import CSVLoader
+from langchain_community.document_loaders import CSVLoader
 
 def loadCSV(file_path):
     try:

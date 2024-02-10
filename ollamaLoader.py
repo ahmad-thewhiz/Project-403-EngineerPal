@@ -1,4 +1,4 @@
-from langchain.llms import Ollama
+from langchain_community.llms import Ollama
 
 def loadOllama(modelName: str, temp: float = 0.5):
     try:

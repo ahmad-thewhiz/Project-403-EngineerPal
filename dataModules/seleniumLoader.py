@@ -1,5 +1,5 @@
 import os
-from langchain.document_loaders import SeleniumURLLoader
+from langchain_community.document_loaders import SeleniumURLLoader
 
 def loadSELENIUM(urls):
     try:
