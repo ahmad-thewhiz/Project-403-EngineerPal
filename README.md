@@ -27,7 +27,6 @@ In the spirit of fostering innovation, EngineerPal is committed to being complet
 ### 3. Development of the prototype. [✅]
 ### 4. Testing of the prototype with SaaS Interface. [✅]
 
-(https://github.com/ahmad-thewhiz/Project-403-EngineerPal/blob/main/images/Screenshot%20(1902).png?raw=true)
 ![alt_text](https://github.com/ahmad-thewhiz/Project-403-EngineerPal/blob/main/images/Screenshot%202024-01-28%20222310.png?raw=true)
 
 
