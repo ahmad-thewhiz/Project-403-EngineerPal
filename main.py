@@ -1,19 +1,19 @@
 import sys
 import os
 
-from Files.csvLoader import loadCSV
-from Files.docsLoader import loadDOCS
-from Files.htmlLoader import loadHTML
-from Files.jsonLoader import loadJSON
-from Files.mdLoader import loadMD
-from Files.pdfLoader import loadPDF
-from Files.txtLoader import loadTXT
+from dataModules.csvLoader import loadCSV
+from dataModules.docsLoader import loadDOCS
+from dataModules.htmlLoader import loadHTML
+from dataModules.jsonLoader import loadJSON
+from dataModules.mdLoader import loadMD
+from dataModules.pdfLoader import loadPDF
+from dataModules.txtLoader import loadTXT
 
-from Websites.urlLoader import loadURL
-from Websites.seleniumLoader import loadSELENIUM
-from Websites.recursiveLoader import loadRECURSIVE
+from dataModules.urlLoader import loadURL
+from dataModules.seleniumLoader import loadSELENIUM
+from dataModules.recursiveLoader import loadRECURSIVE
 
-from Youtube.youtubeLoader import loadYOUTUBE
+from dataModules.youtubeLoader import loadYOUTUBE
 
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
@@ -28,6 +28,10 @@ from langchain.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from langchain.prompts.chat import SystemMessagePromptTemplate
+
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 documents = []
 def load_document(file_path: str):
