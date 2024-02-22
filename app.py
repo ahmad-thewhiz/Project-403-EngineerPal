@@ -25,8 +25,6 @@ else:
 
 llm = ""
 temperature = 0.0
-# rep_pen = 0.0
-# max_length = 1024
 
 def reset_conversation():
     if os.path.exists(dataDir):
@@ -57,7 +55,7 @@ with st.sidebar:
             
     st.subheader('Choose your Pal 👽')
     
-    selected_model = st.sidebar.selectbox('On-Duty', ['Mistral-7B', 'Llama2-13B', 'Microsoft Phi-2', 'Codellama', 'DeepSeek Coder', 'Vicuna'], key='selected_model')
+    selected_model = st.sidebar.selectbox('On-Duty', ['Mistral-7B', 'Llama2-13B', 'Microsoft Phi-2', 'Codellama', 'DeepSeek Coder', 'Vicuna', 'GPT-3.5 Turbo', 'GPT-4'], key='selected_model')
 # Available Models
 # codellama:13b-code                      bcb66db03ddd    7.4 GB  47 minutes ago
 # deepseek-coder:6.7b-instruct-q6_K       5b1241961817    5.5 GB  11 minutes ago
