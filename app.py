@@ -8,6 +8,8 @@ from io import StringIO
 import shutil
 from main import loadQAChain
 from ollamaLoader import loadOllama
+from gptLoader import load_gpt3_5
+from gptLoader import load_gpt4
 
 st.set_page_config(page_title="EngineerPal", page_icon="🧊", layout="wide")
 
@@ -23,8 +25,10 @@ else:
     print(f"The folder '{dataDir}' already exists.")
 
 
-llm = ""
+llm_name = ""
 temperature = 0.0
+# rep_pen = 0.0
+# max_length = 1024
 
 def reset_conversation():
     if os.path.exists(dataDir):
@@ -66,7 +70,7 @@ with st.sidebar:
 # vicuna:13b-q4_1                         d7b312e7d741    8.2 GB  17 minutes ago
     
     if selected_model == 'GPT-4':
-        llm = "gpt4"
+        llm_name = "gpt4"
         
         openai_api = st.text_input('OPENAI API KEY:', type='password')
         if not openai_api.startswith('sk-'):
@@ -77,7 +81,7 @@ with st.sidebar:
         os.environ['OPENAI_API_KEY'] = openai_api
     
     elif selected_model == 'GPT-3.5 Turbo':
-        llm = "gpt3.5"
+        llm_name = "gpt3.5"
         
         openai_api = st.text_input('OPENAI API KEY:', type='password')
         if not openai_api.startswith('sk-'):
@@ -88,19 +92,19 @@ with st.sidebar:
         os.environ['OPENAI_API_KEY'] = openai_api
         
     elif selected_model == 'Mistral-7B':
-        llm = "mistral:7b-instruct-v0.2-q6_K"
+        llm_name = "mistral:7b-instruct-v0.2-q6_K"
     elif selected_model == 'Llama2-13B':
-        llm = "llama2:13b-chat"
+        llm_name = "llama2:13b-chat"
     elif selected_model == 'Microsoft Phi-2':
-        llm = "phi:2.7b-chat-v2-fp16"
+        llm_name = "phi:2.7b-chat-v2-fp16"
     elif selected_model == 'Codellama':
-        llm = "codellama:13b-code"
+        llm_name = "codellama:13b-code"
     elif selected_model == 'DeepSeek Coder':
-        llm = "deepseek-coder:6.7b-instruct-q6_K"
+        llm_name = "deepseek-coder:6.7b-instruct-q6_K"
     elif selected_model == 'Vicuna':
-        llm = "vicuna:13b-q4_1"
+        llm_name = "vicuna:13b-q4_1"
     else:
-        llm = "mistral:7b-instruct-v0.2-q6_K"
+        llm_name = "mistral:7b-instruct-v0.2-q6_K"
         
     temperature = st.sidebar.slider('Temperature:', min_value=0.00, max_value=1.0, value=0.8, step=0.01)
     # rep_pen = st.sidebar.slider('Repition Penalty:', min_value=0.00, max_value=2.0, value=1.15, step=0.05)
@@ -119,6 +123,15 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
+
+if llm_name == 'gpt3.5':
+    llm = load_gpt3_5(temperature)
+elif llm_name == 'gpt4':
+    llm = load_gpt4(temperature)
+else:
+    llm = loadOllama(llm_name)
+    
+qa_chain = loadQAChain(llm)
         
 # Chat
 if prompt := st.chat_input("What's up?"):
@@ -132,8 +145,8 @@ if prompt := st.chat_input("What's up?"):
         message_placeholder = st.empty()
 
         chat_history = []
-        llm = loadOllama(llm, temperature)
-        qa_chain = loadQAChain(llm)
+        # llm = load_gpt3_5(temperature)
+        # qa_chain = loadQAChain(llm)
         assistant_response = qa_chain({"question": prompt, "chat_history": chat_history})
         print("Answer: " + assistant_response["answer"])
         chat_history.append((prompt, assistant_response["answer"]))
